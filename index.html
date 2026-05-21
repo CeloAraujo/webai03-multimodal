@@ -5,55 +5,130 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Web AI Demo</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <div class="container">
-        <h1>🤖 Web AI Demo</h1>
-
-        <form id="question-form">
-            <div class="parameters">
-                <div class="param-group">
-                    <label for="temperature">Temperature: <span id="temp-value" class="value-display"></span></label>
-                    <input type="range" id="temperature" name="temperature" step="0.1">
-                    <div class="param-description">Controla a criatividade das respostas. Valores baixos = mais focado,
-                        valores altos = mais criativo</div>
-                </div>
-
-                <div class="param-group">
-                    <label for="topK">Top K: <span id="topk-value" class="value-display"></span></label>
-                    <input type="number" id="topK" name="topK">
-                    <div class="param-description">Limita a seleção às K palavras mais prováveis. Valores menores = mais
-                        previsível</div>
-                </div>
+    <main class="container">
+        <header class="header">
+            <div class="header-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 2v4"></path>
+                    <path d="M12 18v4"></path>
+                    <path d="M4.93 4.93l2.83 2.83"></path>
+                    <path d="M16.24 16.24l2.83 2.83"></path>
+                    <path d="M2 12h4"></path>
+                    <path d="M18 12h4"></path>
+                    <path d="M4.93 19.07l2.83-2.83"></path>
+                    <path d="M16.24 7.76l2.83-2.83"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                </svg>
             </div>
 
-            <div class="file-input-group">
-                <label>📎 Anexar Arquivo (Imagem ou Áudio em inglês):</label>
+            <h1>Web AI Demo</h1>
+
+            <span class="badge">Multimodal</span>
+        </header>
+
+        <form id="question-form" class="card">
+            <section class="parameters" aria-label="Parâmetros da inteligência artificial">
+                <div class="param-group">
+                    <label for="temperature" class="param-label">
+                        Temperature
+                        <span id="temp-value" class="value-display"></span>
+                    </label>
+
+                    <input type="range" id="temperature" name="temperature" step="0.1">
+
+                    <p class="param-description">
+                        Controla a criatividade das respostas. Valores baixos geram respostas mais focadas;
+                        valores altos deixam a resposta mais criativa.
+                    </p>
+                </div>
+
+                <div class="param-group">
+                    <label for="topK" class="param-label">
+                        Top K
+                        <span id="topk-value" class="value-display"></span>
+                    </label>
+
+                    <input type="number" id="topK" name="topK">
+
+                    <p class="param-description">
+                        Limita a seleção às K palavras mais prováveis. Valores menores tornam a resposta
+                        mais previsível.
+                    </p>
+                </div>
+            </section>
+
+            <div class="divider"></div>
+
+            <section class="file-input-group">
+                <label class="field-label" for="file-input">
+                    Anexar arquivo
+                </label>
+
                 <div class="file-input-wrapper">
                     <input type="file" id="file-input" accept="image/*,audio/*" hidden>
+
                     <button type="button" class="file-upload-btn" id="file-upload-btn">
-                        <span class="upload-icon">📁</span>
+                        <span class="upload-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 3v12"></path>
+                                <path d="M7 8l5-5 5 5"></path>
+                                <path d="M5 21h14"></path>
+                            </svg>
+                        </span>
+
                         <span class="upload-text">Escolher arquivo</span>
                     </button>
+
                     <span class="file-selected-name" id="file-selected-name"></span>
                 </div>
+
+                <p class="param-description">
+                    Envie uma imagem ou um áudio em inglês para análise multimodal.
+                </p>
+
                 <div class="file-preview" id="file-preview"></div>
+            </section>
+
+            <div class="divider"></div>
+
+            <div class="question-group">
+                <label for="question" class="field-label">
+                    Converse com ela
+                </label>
+
+                <textarea
+                    name="question"
+                    id="question"
+                    placeholder="Digite sua pergunta aqui..."
+                ></textarea>
             </div>
 
-            <label for="question">Converse com ela:</label>
-            <textarea name="question" id="question" placeholder="Digite sua pergunta aqui..."></textarea>
-
-            <button type="submit" id="ask-button">Enviar</button>
+            <button type="submit" id="ask-button">
+                Enviar
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M5 12h14"></path>
+                    <path d="M13 6l6 6-6 6"></path>
+                </svg>
+            </button>
         </form>
 
         <div id="output"></div>
 
         <footer class="copyright">
-            Erick Wendel - Engenharia de Software com IA Aplicada - UNIPDS - <span id="year"></span>
+            Marcelo Araujo <span id="year"></span>
         </footer>
-    </div>
+    </main>
 
     <script type="module" src="./index.js"></script>
 </body>
